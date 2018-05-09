@@ -2,12 +2,25 @@
     "root": true,
     "extends": ["airbnb-base","react"],
     "env": {
+      "browser":true,
       "node": true,
       "es6": true,
       "mocha": true
     },
+    
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js",".jsx"]
+        }
+      }
+    },
+    
+    "globals": {
+      "document": false
+    },
     "rules": {
-      "indent": ["error", 2],
+      "indent": ["error", 4],
       "one-var": 0,
       "one-var-declaration-per-line": 0,
       "new-cap": 0,

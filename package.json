@@ -4,6 +4,9 @@
   "description": "front-end for the weconnect API",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +20,13 @@
   },
   "homepage": "https://github.com/kmunene/weconnect-react#readme",
   "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "html-webpack-plugin": "^3.2.0",
     "path": "^0.12.7",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "webpack": "^4.7.0",
     "webpack-dev-server": "^3.1.4"
   },
@@ -26,6 +35,13 @@
     "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "eslint": "^4.19.1"
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-react": "^7.7.0",
+    "style-loader": "^0.21.0",
+    "webpack-cli": "^2.1.2"
   }
 }
