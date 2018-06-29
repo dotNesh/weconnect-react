@@ -1,0 +1,9 @@
+export const REGISTER_USER = 'REGISTER_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const ADD_BUSINESS = 'ADD_BUSINESS';
+export const GET_BUSINESSES = 'GET_BUSINESSES';
+export const GET_BUSINESS = 'GET_BUSINESS';
+export const POST_REVIEWS = 'POST_REVIEWS';
+export const GET_REVIEWS = 'GET_REVIEWS';
+export const EDIT_BUSINESS = 'EDIT_BUSINESS';
+export const DELETE_BUSINESS = 'DELETE_BUSINESS';
