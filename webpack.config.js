@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8080;
 const DefinePlugin = new webpack.DefinePlugin({
   "process.env": {
     PORT: JSON.stringify(PORT),
-    HOST: '0.0.0.0',
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
   }
 });
 
