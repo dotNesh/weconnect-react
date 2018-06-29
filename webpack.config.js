@@ -2,7 +2,16 @@
     ./webpack.config.js
 */
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const PORT = process.env.PORT || 8080;
+
+const DefinePlugin = new webpack.DefinePlugin({
+  "process.env": {
+    PORT: JSON.stringify(PORT),
+  }
+});
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, './public/index.html'),
@@ -16,7 +25,7 @@ module.exports = {
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
-    port: 8000
+    port: PORT
   },
   performance: { hints: false },
   output: {
@@ -47,5 +56,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+    DefinePlugin
+  ]
 };
