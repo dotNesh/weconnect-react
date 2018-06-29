@@ -1,23 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import LoginForm from './LoginForm';
 
-const LoginForm = () => (
-    <form action="#" className="login-form">
-        <div className="form-group login">
-            <label htmlFor="useremail">Email Address:</label>
-            <input type="email" id="useremail" className="form-control " placeholder="someone@examle.com" />
+import { loginUser } from '../../actions/user';
+
+class LoginComponent extends Component {
+    static propTypes = {
+      username: PropTypes.string,
+      password: PropTypes.string,
+      actions: PropTypes.object
+    }
+
+    state = {
+      username: this.props.username || '',
+      password: this.props.password || '',
+    }
+
+    handleSubmit = e => {
+      e.preventDefault();
+
+      const { username, password } = this.state;
+      this.handleSave(username, password);
+    }
+
+    handleChange = e => {
+      const { name, value } = e.target;
+      this.setState({ [name]: value });
+    }
+
+    handleSave = (username, password) => {
+      this.props.loginUser(username, password);
+    }
+
+    render() {
+      return (
+        <div>
+          <LoginForm
+            state={this.state}
+            handleSubmit={this.handleSubmit}
+            onSave={this.handleSave}
+            handleChange={this.handleChange}
+          />
         </div>
+      );
+    }
+}
+const mapStateToProps = state => ({
+  auth: state.isAuthenticated
+});
 
-        <div className="form-group login">
-            <label htmlFor="userpasswrd">Password:</label>
-            <input type="password" id="userpasswrd" className="form-control" placeholder="password" />
-        </div>
+const mapDispatchToProps = dispatch => ({
+  loginUser: bindActionCreators(loginUser, dispatch)
+});
 
-        <div className="form-group login">
-            <button id="loginbtn" type="submit" className="btn btn-primary">Log in</button>
-        </div>
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginComponent);
 
-        <p className="form-group login">Do you have an account? Sign up<a href="/"> here.</a></p>
-    </form>
-);
-
-export default LoginForm;
