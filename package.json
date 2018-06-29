@@ -4,7 +4,7 @@
   "description": "front-end for the weconnect API",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 127.0.0.1",
+    "start": "webpack-dev-server --host 127.0.0.1 --port 8000",
     "test": "jest"
   },
   "repository": {
