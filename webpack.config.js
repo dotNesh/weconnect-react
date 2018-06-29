@@ -16,6 +16,7 @@ module.exports = {
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
+    port: 8000
   },
   performance: { hints: false },
   output: {
