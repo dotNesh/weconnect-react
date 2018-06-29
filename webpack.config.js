@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8080;
 const DefinePlugin = new webpack.DefinePlugin({
   "process.env": {
     PORT: JSON.stringify(PORT),
+    HOST: '0.0.0.0',
   }
 });
 
@@ -25,7 +26,7 @@ module.exports = {
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
-    port: PORT
+    port: PORT,
   },
   performance: { hints: false },
   output: {
