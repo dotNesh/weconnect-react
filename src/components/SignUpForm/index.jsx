@@ -1,35 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import SignUpForm from './SignUpForm';
 
-const SignUpForm = () => (
-    <aside id="demo">
-        <form action="#" className="signin-form">
-            <h3 className="form-group">Create an account</h3>
-            <div className="form-group">
-                <label htmlFor="fullname">Full Name:</label>
-                <input type="text" id="fullname" className="form-control" placeholder="Full name" />
-            </div>
+import { registerUser } from '../../actions/user';
 
-            <div className="form-group">
-                <label htmlFor="useremail">Email Address:</label>
-                <input type="email" id="useremail" className="form-control" placeholder="someone@examle.com" />
-            </div>
+class RegisterComponent extends Component {
+  static propTypes = {
+    username: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    actions: PropTypes.object
+  }
 
-            <div className="form-group">
-                <label htmlFor="userpasswrd">Password:</label>
-                <input type="password" id="userpasswrd" className="form-control" placeholder="Set a password" />
-            </div>
+state = {
+  username: this.props.username || '',
+  email: this.props.email || '',
+  password: this.props.password || ''
+}
 
-            <div className="form-group">
-                <button type="submit" className="btn btn-primary get-started" id="login-btn">Get Started</button>
-            </div>
+handleSubmit = e => {
+  e.preventDefault();
 
-            <div className="form-group">
-                <p className="form-txt">Already have an account? Login <Link to="/login">here.</Link></p>
-            </div>
+  const {
+    username, email, password
+  } = this.state;
+  this.handleSave(username, email, password);
+}
 
-        </form>
-    </aside>
-);
+handleChange = e => {
+  const { name, value } = e.target;
+  this.setState({ [name]: value });
+}
 
-export default SignUpForm;
+  handleSave = (username, email, password) => {
+    if (email.length !== 0) {
+      this.props.registerUser(username, email, password);
+    }
+  }
+
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        <SignUpForm
+          onSave={this.handleSave}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          state={this.state}
+        />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  registerUser: bindActionCreators(registerUser, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterComponent);
+
