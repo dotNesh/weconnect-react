@@ -16,6 +16,11 @@ export const login = res => ({
   message: res.message
 });
 
+export const reset = res => ({
+  type: types.RESET_PASSWORD,
+  message: res.message
+});
+
 export const registerUser = (username, email, password) => {
   const user = {
     username: username,
@@ -61,3 +66,12 @@ export const loginUser = (username, password) => (dispatch) => Axios.post('https
     toast.error(error.response.data);
   });
 
+export const resetPassword = (username) => (dispatch) => Axios.post('https://weconnect02.herokuapp.com/api/v2/auth/reset-password', { username: username })
+  .then(response => {
+    console.log(response);
+    dispatch(reset(response.data));
+    toast.success(response.data.message);
+  })
+  .catch(error => {
+    toast.error(error.response.data.message);
+  });
