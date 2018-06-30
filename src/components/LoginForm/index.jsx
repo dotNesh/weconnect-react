@@ -4,18 +4,20 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 
-import { loginUser } from '../../actions/user';
+import { loginUser, resetPassword } from '../../actions/user';
 
 class LoginComponent extends Component {
     static propTypes = {
       username: PropTypes.string,
       password: PropTypes.string,
+      resetname: PropTypes.string,
       actions: PropTypes.object
     }
 
     state = {
       username: this.props.username || '',
       password: this.props.password || '',
+      resetname: this.props.resetname || '',
     }
 
     handleSubmit = e => {
@@ -23,6 +25,13 @@ class LoginComponent extends Component {
 
       const { username, password } = this.state;
       this.handleSave(username, password);
+    }
+
+    handleResetSubmit = e => {
+      e.preventDefault();
+
+      const { resetname } = this.state;
+      this.handleReset(resetname);
     }
 
     handleChange = e => {
@@ -34,6 +43,10 @@ class LoginComponent extends Component {
       this.props.loginUser(username, password);
     }
 
+    handleReset = (resetname) => {
+      this.props.resetPassword(resetname);
+    }
+
     render() {
       return (
         <div>
@@ -42,6 +55,7 @@ class LoginComponent extends Component {
             handleSubmit={this.handleSubmit}
             onSave={this.handleSave}
             handleChange={this.handleChange}
+            handleResetSubmit={this.handleResetSubmit}
           />
         </div>
       );
@@ -52,7 +66,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: bindActionCreators(loginUser, dispatch)
+  loginUser: bindActionCreators(loginUser, dispatch),
+  resetPassword: bindActionCreators(resetPassword, dispatch)
 });
 
 export default connect(
