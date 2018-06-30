@@ -1,4 +1,4 @@
-import { REGISTER_USER, LOGIN_USER } from '../actions/types';
+import { REGISTER_USER, LOGIN_USER, RESET_PASSWORD } from '../actions/types';
 
 let auth = JSON.parse(localStorage.getItem('token'));
 const initialState = auth ? { isAuthenticated: true } : { isAuthenticated: false };
@@ -16,6 +16,14 @@ const Users = (state = initialState, action) => {
     return [
       state, {
         message: action.message,
+      }
+    ];
+
+  case RESET_PASSWORD:
+    return [
+      state, {
+        message: action.message,
+        isAuthenticated: false
       }
     ];
 
