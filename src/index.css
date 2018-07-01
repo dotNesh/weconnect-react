@@ -149,11 +149,14 @@ i{
 
 .container.profile{
     margin: auto;
-    width: 700px;
+    width: 800px;
 }
 
 body{
     height: -webkit-fill-available;
     background-blend-mode: darken;
     background-color:lightgray;
+}
+.pag{
+    padding-top: 30px;
 }
