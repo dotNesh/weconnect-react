@@ -4,6 +4,7 @@
   "description": "front-end for the weconnect API",
   "main": "index.js",
   "jest": {
+    "collectCoverage": true,
     "setupFiles": [
       "jest-localstorage-mock"
     ]
