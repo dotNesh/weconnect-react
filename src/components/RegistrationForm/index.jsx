@@ -1,38 +1,68 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import RegistrationForm from './RegistrationForm';
 
-const RegistrationForm = () => (
-    <form action="#" className="register-form">
-        <div className="form-group register">
-            <label htmlFor="bizname">Business name:</label>
-            <input type="text" id="bizname" className="form-control " placeholder="Business name" />
-        </div>
+import { registerBusiness } from '../../actions/business';
 
-        <div className="form-row">
-            <div className="form-group col-md-6 register">
-                <label htmlFor="location">Location:</label>
-                <input type="text" className="form-control" id="location" placeholder="Location"/>
+class BusinessAddComponent extends Component {
+    static propTypes = {
+      businessName: PropTypes.string,
+      category: PropTypes.string,
+      location: PropTypes.string,
+      description: PropTypes.string,
+      actions: PropTypes.object
+    }
+
+    state = {
+      businessName: this.props.businessName || '',
+      category: this.props.category || '',
+      location: this.props.location || '',
+      description: this.props.description || ''
+    }
+
+    handleSubmit = e => {
+      e.preventDefault();
+
+      const {
+        businessName, category, location, description
+      } = this.state;
+      this.handleSave(businessName, category, location, description);
+    }
+
+    handleChange = e => {
+      const { name, value } = e.target;
+      this.setState({ [name]: value });
+    }
+
+        handleSave = (businessName, category, location, description) => {
+          this.props.registerBusiness(businessName, category, location, description);
+        }
+
+        render() {
+          return (
+            <div>
+              <RegistrationForm
+                state={this.state}
+                handleSubmit={this.handleSubmit}
+                onSave={this.handleSave}
+                handleChange={this.handleChange}
+              />
             </div>
-            <div className="form-group col-md-4 register">
-                <label htmlFor="category">Category:</label>
-                <select id="category" name="category" className="form-control">
-                    <option selected>Choose...</option>
-                    <option value="Retail">Retail</option>
-                    <option value="Hotel">Hotel</option>
-                    <option value="Housing">Housing</option>
-                    <option>...</option>
-                </select>
-            </div>
-        </div>
-        <div className=" form-group register">
-            <label htmlFor="bizdescription">Description:</label>
-            <textarea className="form-control" rows="7" id="bizdescription" placeholder="Describe your business" />
-        </div>
+          );
+        }
+}
+const mapStateToProps = state => ({
+  business: state.business
+});
 
-        <div className=" form-group register">
-            <button type="submit" className="btn btn-primary btn-block">Register Business</button>
-        </div>
+const mapDispatchToProps = dispatch => ({
+  registerBusiness: bindActionCreators(registerBusiness, dispatch)
+});
 
-    </form>
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BusinessAddComponent);
 
-export default RegistrationForm;

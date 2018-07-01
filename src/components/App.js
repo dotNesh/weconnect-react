@@ -4,24 +4,24 @@ import HomePage from './HomePage/';
 import AboutPage from './AboutPage';
 import Navigation from './Navigation';
 import LoginPage from './LoginPage';
-import RegistrationPage from './RegistrationPage';
-import CatalogPage from './CatalogPage';
-import BusinessProfilePage from './BusinessProfilePage';
+import RegistrationForm from './RegistrationForm';
+import CatalogList from './CatalogList';
+import BusinessProfile from './BusinessProfile';
 
 
 const App = () => (
+  <div>
     <div>
-        <div>
-            <Navigation />
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/about" component={AboutPage} />
-            <Route exaact path="/login" component={LoginPage} />
-            <Route exaact path="/register" component={RegistrationPage} />
-            <Route exaact path="/catalog" component={CatalogPage} />
-            <Route exaact path="/businessprofile" component={BusinessProfilePage} />
-        </div>
-
+      <Navigation />
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/about" component={AboutPage} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/register" component={RegistrationForm} />
+      <Route exact path="/catalog" component={CatalogList} />
+      <Route path="/businessprofile/:business_id" component={BusinessProfile} />
     </div>
+
+  </div>
 );
 
 export default App;
