@@ -1,23 +1,28 @@
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import * as types from './types';
+import authHeader from '../helpers/authHeader';
 
 //axios.defaults.baseURL = 'https://weconnect02.herokuapp.com/api/v2/';
 
 export const register = res => ({
   type: types.REGISTER_USER,
-  message: res.message,
+  message: res,
   isAuthenticated: false
 });
 
 export const login = res => ({
   type: types.LOGIN_USER,
-  token: res.token,
   message: res.message
 });
 
 export const reset = res => ({
   type: types.RESET_PASSWORD,
+  message: res.message
+});
+
+export const logout = res => ({
+  type: types.LOGOUT_USER,
   message: res.message
 });
 
@@ -31,7 +36,7 @@ export const registerUser = (username, email, password) => {
     .then(response => {
       dispatch(register(response.data));
       toast.success(response.data);
-      window.location.assign("/login");
+      //window.location.assign("/login");
     })
     .catch(error => {
       console.log(error.response);
@@ -74,4 +79,20 @@ export const resetPassword = (username) => (dispatch) => Axios.post('https://wec
   })
   .catch(error => {
     toast.error(error.response.data.message);
+  });
+
+export const logoutUser = (id) => (dispatch) => Axios({
+  method: 'post',
+  url: `https://weconnect02.herokuapp.com/api/v2/auth/logout`,
+  headers: authHeader()
+})
+  .then(response => {
+    dispatch(logout(response.data));
+    localStorage.removeItem('token');
+    toast.success(response.data.message);
+  })
+  .catch(error => {
+    if (error) {
+      toast.error(error.response.data.message);
+    }
   });

@@ -1,5 +1,6 @@
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const ADD_BUSINESS = 'ADD_BUSINESS';
 export const GET_BUSINESSES = 'GET_BUSINESSES';
