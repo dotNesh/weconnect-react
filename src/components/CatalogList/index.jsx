@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CatalogSearch from '../CatalogSearch';
-import CatalogPagination from '../CatalogPagination';
 
 
 import * as Actions from '../../actions/business';
@@ -19,6 +18,7 @@ class CatalogComponent extends Component {
   }
 
   render() {
+    console.log("hahahahaa", this.props);
     const businessItems = this.props.businesses.map(business => (
       <div key={business.business_id}>
         <div className="col-sm-12">
@@ -54,14 +54,6 @@ class CatalogComponent extends Component {
             <div className="col-sm-8">
               <div className = "row">
                 { businessItems }
-              </div>
-              < div className="row">
-                <div className="col-sm-6">
-                  <CatalogPagination
-                    page = {this.props.page}
-                    onPageChange={this.handlePageChange}
-                  />
-                </div>
               </div>
             </div>
           </div>
