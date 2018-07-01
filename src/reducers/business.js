@@ -24,7 +24,9 @@ const BusinessReducer = (state = initialState, action) => {
     return {
       state,
       businesses: action.payload.Businesses,
-      page: action.page
+      page: action.page,
+      ppage: action.ppage,
+      npage: action.npage
     };
 
   case GET_BUSINESS:
