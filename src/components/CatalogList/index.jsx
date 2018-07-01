@@ -1,89 +1,96 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CatalogSearch from '../CatalogSearch';
 import CatalogPagination from '../CatalogPagination';
 
-const CatalogList = () => (
-    <div className="list-group">
-        <div className="row">
+
+import * as Actions from '../../actions/business';
+
+class CatalogComponent extends Component {
+  componentDidMount() {
+    this.props.actions.getBusinesses();
+  }
+
+  handlePageChange = (url) => {
+    this.props.actions.getBusinesses(url);
+  }
+
+  render() {
+    const businessItems = this.props.businesses.map(business => (
+      <div key={business.business_id}>
+        <div className="col-sm-12">
+          <div className="card text-center">
+            <div className="card-header">
+              {business.business_name}
+            </div>
+            <div className="card-body">
+              <p className="card-title">{business.description}</p>
+              <Link to={`/businessprofile/${business.business_id}`}>Profile</Link>
+            </div>
+            <div className="card-footer text-muted">
+              {business.location}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    ));
+    return (
+      <div className="container">
+        <div className="list-group">
+          <div className="row">
             <div className="col-sm-4 sidenav">
-                <CatalogSearch />
+              <CatalogSearch
+                business={this.props.businesses}
+                onSearch={this.handlePageChange}
+                page={this.props.page}
+                npage={this.props.npage}
+                ppage={this.props.ppage}
+              />
             </div>
             <div className="col-sm-8">
-                <div className = "row">
-                    <div className="col-sm-4">
-                        <Link to="/businessprofile" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Mama Omosh Salon</h5>
-                                <small>5 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Mary Orwa</small>
-                        </Link>
-                    </div>
-                    <div className="col-sm-4">
-                        <a href="#" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Nina Consultants</h5>
-                                <small>8 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Muthiora Shinina</small>
-                        </a>
-                    </div>
-                    <div className="col-sm-4">
-                        <Link to="/businessprofile" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Mama Omosh Salon</h5>
-                                <small>5 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Mary Orwa</small>
-                        </Link>
-                    </div>
+              <div className = "row">
+                { businessItems }
+              </div>
+              < div className="row">
+                <div className="col-sm-6">
+                  <CatalogPagination
+                    page = {this.props.page}
+                    onPageChange={this.handlePageChange}
+                  />
                 </div>
-                <div className="row">
-                    <div className="col-sm-4">
-                        <Link to="/businessprofile" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Mama Omosh Salon</h5>
-                                <small>5 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Mary Orwa</small>
-                        </Link>
-                    </div>
-                    <div className="col-sm-4">
-                        <a href="#" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Nina Consultants</h5>
-                                <small>8 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Muthiora Shinina</small>
-                        </a>
-                    </div>
-                    <div className="col-sm-4">
-                        <Link to="/businessprofile" className="list-group-item list-group-item-action">
-                            <div className="d-flex justify-content-between">
-                                <h5>Mama Omosh Salon</h5>
-                                <small>5 days ago</small>
-                            </div>
-                            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Owned by Mary Orwa</small>
-                        </Link>
-                    </div>
-                </div>
-                < div className="row">
-                    <div className="col-sm-6">
-                        <CatalogPagination />
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    );
+  }
+}
 
+CatalogComponent.PropTypes = {
+  getBusinesses: PropTypes.func,
+  businesses: PropTypes.array,
+  page: PropTypes.array,
+  actions: PropTypes.object
+};
 
-);
+const mapStateToProps = state => ({
+  businesses: state.businesses.businesses,
+  page: state.businesses.page,
+  npage: state.businesses.npage,
+  ppage: state.businesses.ppage
+});
 
-export default CatalogList;
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CatalogComponent);
+
