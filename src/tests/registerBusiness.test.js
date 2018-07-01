@@ -1,6 +1,6 @@
 import reducers from '../reducers';
 
-test('reducers', () => {
+test('Business registration', () => {
   let state;
   state = reducers({
     user: { isAuthenticated: true },

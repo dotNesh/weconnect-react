@@ -1,6 +1,6 @@
 import reducers from '../reducers';
 
-test('reducers', () => {
+test('user logout', () => {
   let state;
   state = reducers({
     user: [{ isAuthenticated: true }, { message: 'Logout successful' }],

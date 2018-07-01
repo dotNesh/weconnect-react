@@ -1,6 +1,6 @@
 import reducers from '../reducers';
 
-test('reducers', () => {
+test('initial state test', () => {
   let state;
   state = reducers(undefined, {});
   expect(state).toEqual({
