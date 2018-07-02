@@ -32,7 +32,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
   },
   resolve: {
     extensions: [".js", ".jsx"]
