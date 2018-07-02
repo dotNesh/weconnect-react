@@ -59,10 +59,12 @@ render() {
             <ReviewForm id={this.state.id} />
           </div>
           <div className="col-sm-4">
-            <DeleteBusiness id={this.state.id}/>
-            <hr/>
-            <EditForm id={this.state.id} category={business["Category"]} location={business["Location"]} description={business["Description"]}/>
-            <hr/>
+            { this.props.user.isAuthenticated ?
+              <div>
+                <DeleteBusiness id={this.state.id}/>
+                <hr/>
+                <EditForm id={this.state.id} category={business["Category"]} location={business["Location"]} description={business["Description"]}/>
+                <hr/></div> : null}
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Reviews</button>
           </div>
         </div>
@@ -80,6 +82,7 @@ BusinessProfile.PropTypes = {
 
 const mapStateToProps = state => ({
   business: state.businesses.business,
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -33,11 +33,11 @@ class CatalogSearch extends Component {
     handleSave = () => {
       let url;
       if ((this.state.category) && (this.state.location)) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&location=${this.state.location}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&location=${this.state.location}&&limit=6&&page=${this.state.page}`;
       } else if (this.state.category) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&limit=6&&page=${this.state.page}`;
       } else if (this.state.location) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&location=${this.state.location}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&location=${this.state.location}&&limit=6&&page=${this.state.page}`;
       } else {
         url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&limit=6&&page=${this.state.page}`;
       }
