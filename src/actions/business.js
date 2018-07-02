@@ -60,13 +60,14 @@ export const registerBusiness = (businessName, category, location, description) 
   .then(response => {
     dispatch(addBusiness(response.data));
     toast.success(response.data);
+    window.location.assign("/catalog");
   })
   .catch(error => {
     if (error) {
       toast.error(error.response.data);
     }
     if (error.response.data.msg) {
-      toast.error(`Please login to Edit Business`, {
+      toast.error(`Please login to Register a Business`, {
         autoClose: 5000
       });
       window.location.assign("/login");
@@ -102,14 +103,10 @@ export const getBusiness = (id) => {
   })
     .then(response => {
       dispatch(fetchBusiness(response.data));
-      console.log("dkkdkd", response.data);
-      //window.location.assign("/catalog");
-      //notify.show("not found", 'success', 4000);
     })
     .catch(error => {
       if (error.response.data) {
-        console.log(error.response.data);
-        //notify.show(error.response.data, 'error', 4000);
+        toast.error(error.response.data);
       }
     });
 };
@@ -129,6 +126,7 @@ export const postReview = (id, title, description) => {
     .then(response => {
       dispatch(postReviews(response.data));
       toast.success(response.data.message);
+      window.location.reload();
     })
     .catch(error => {
       if (error.response.data.msg) {
@@ -190,20 +188,14 @@ export const deleteBusinesses = (id) => {
       dispatch(deleteBusiness(response.data));
       toast.success(`${response.data.message}`);
       window.location.assign(`/catalog`);
-      console.log("res", response);
-      console.log("res.dat", response.data);
     })
     .catch(error => {
       if (error.response.msg) {
-        console.log("data", error.response.data);
         toast.error(`Please login to Delete Business`, {
           autoClose: 5000
         });
         window.location.assign("/login");
       } else if (error.response.data.message) {
-        console.log("error.response.message");
-        console.log(error.response.message);
-        console.log(error.response);
         toast.error(`${error.response.data.message}`, {
           autoClose: 5000
         });
@@ -220,7 +212,6 @@ export const getReviews = (id) => {
   })
     .then(response => {
       dispatch(fetchReviews(response.data));
-      //window.location.reload();
     })
     .catch(error => {
       if (error) {

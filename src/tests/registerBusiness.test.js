@@ -7,11 +7,14 @@ test('Business registration', () => {
     businesses: {
       business: [], businesses: [], page: [], message: [], reviews: []
     }
-  }, { type: 'ADD_BUSINESS', message: 'Andela Kenya. Business successfully registered by nina' });
+  }, { type: 'ADD_BUSINESS', message: 'Kaimati. Business successfully registered by nina' });
   expect(state).toEqual({
     user: { isAuthenticated: true },
-    businesses: [{
-      business: [], businesses: [], page: [], message: [], reviews: []
-    }, {}]
+    businesses: {
+      state: {
+        business: [], businesses: [], page: [], message: [], reviews: []
+      },
+      message: 'Kaimati. Business successfully registered by nina'
+    }
   });
 });
