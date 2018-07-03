@@ -11,14 +11,10 @@ const initialState = {
 const BusinessReducer = (state = initialState, action) => {
   switch (action.type) {
   case ADD_BUSINESS:
-    return [
-      state, {
-        businessName: action.businessName,
-        category: action.category,
-        location: action.location,
-        description: action.description
-      }
-    ];
+    return {
+      state,
+      message: action.message
+    };
 
   case GET_BUSINESSES:
     return {
@@ -46,11 +42,13 @@ const BusinessReducer = (state = initialState, action) => {
       state,
       message: action.message
     };
+
   case DELETE_BUSINESS:
     return {
       state,
       message: action.message
     };
+
   case GET_REVIEWS:
     return {
       state,

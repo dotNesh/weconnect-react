@@ -22,7 +22,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
@@ -32,7 +32,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
   },
   resolve: {
     extensions: [".js", ".jsx"]

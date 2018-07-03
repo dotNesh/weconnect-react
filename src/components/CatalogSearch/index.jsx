@@ -33,11 +33,11 @@ class CatalogSearch extends Component {
     handleSave = () => {
       let url;
       if ((this.state.category) && (this.state.location)) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&location=${this.state.location}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&location=${this.state.location}&&limit=6&&page=${this.state.page}`;
       } else if (this.state.category) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&category=${this.state.category}&&limit=6&&page=${this.state.page}`;
       } else if (this.state.location) {
-        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&location=${this.state.location}&&limit=6`;
+        url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&location=${this.state.location}&&limit=6&&page=${this.state.page}`;
       } else {
         url = `https://weconnect02.herokuapp.com/api/v2/businesses/search?q=${this.state.q}&&limit=6&&page=${this.state.page}`;
       }
@@ -76,19 +76,20 @@ class CatalogSearch extends Component {
 
             </form>
           </div>
-          <div>
-            <nav aria-label="">
+          <div className="pag">
+            <nav aria-label="...">
               <ul className="pagination">
+                {this.props.page > 1 ?
+                  <li className="page-item">
+                    <a type="hidden" className="page-link"><button name="page" value={this.props.ppage} onClick={this.handlePagination}>Previous:{this.props.ppage}</button></a>
+                  </li> :
+                  <li className="page-item disabled">
+                    <a type="hidden" className="page-link"><button>Previous</button></a>
+                  </li> }
+                <li className="page-item"><a className="page-link"><button name="page" value={this.props.page} onClick={this.handlePagination}>Current:{this.props.page}</button></a></li>
+
                 <li className="page-item">
-                  <a type="hidden" className="page-link" name="page" value={this.props.ppage} onClick={this.handlePagination}>Previous</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item active">
-                  <a className="page-link" value={this.state.page} href="#">2 <span className="sr-only">(current)</span></a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
+                  <a className="page-link"><button name="page" value={this.props.npage} onClick={this.handlePagination}>Next:{this.props.npage}</button></a>
                 </li>
               </ul>
             </nav>
