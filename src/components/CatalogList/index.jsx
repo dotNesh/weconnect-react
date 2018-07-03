@@ -18,7 +18,6 @@ class CatalogComponent extends Component {
   }
 
   render() {
-    console.log("hahahahaa", this.props);
     const businessItems = this.props.businesses.map(business => (
       <div key={business.business_id}>
         <div className="col-sm-12">
