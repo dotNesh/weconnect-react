@@ -36,22 +36,22 @@ class BusinessAddComponent extends Component {
       this.setState({ [name]: value });
     }
 
-        handleSave = (businessName, category, location, description) => {
-          this.props.registerBusiness(businessName, category, location, description);
-        }
+    handleSave = (businessName, category, location, description) => {
+      this.props.registerBusiness(businessName, category, location, description);
+    }
 
-        render() {
-          return (
-            <div>
-              <RegistrationForm
-                state={this.state}
-                handleSubmit={this.handleSubmit}
-                onSave={this.handleSave}
-                handleChange={this.handleChange}
-              />
-            </div>
-          );
-        }
+    render() {
+      return (
+        <div>
+          <RegistrationForm
+            state={this.state}
+            handleSubmit={this.handleSubmit}
+            onSave={this.handleSave}
+            handleChange={this.handleChange}
+          />
+        </div>
+      );
+    }
 }
 const mapStateToProps = state => ({
   business: state.business
