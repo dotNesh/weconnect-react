@@ -14,7 +14,8 @@ test('Business registration', () => {
       state: {
         business: [], businesses: [], page: [], message: [], reviews: []
       },
-      message: 'Kaimati. Business successfully registered by nina'
+      message: 'Kaimati. Business successfully registered by nina',
+      businesses: []
     }
   });
 });

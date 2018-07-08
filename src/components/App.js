@@ -11,15 +11,14 @@ import BusinessProfile from './BusinessProfile';
 
 const App = () => (
   <div>
-    <div>
-      <Navigation />
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/about" component={AboutPage} />
-      <Route exact path="/login" component={LoginPage} />
-      <Route exact path="/register" component={RegistrationForm} />
-      <Route exact path="/catalog" component={CatalogList} />
-      <Route path="/businessprofile/:business_id" component={BusinessProfile} />
-    </div>
+
+    <Navigation />
+    <Route exact path="/" component={HomePage} />
+    <Route exact path="/about" component={AboutPage} />
+    <Route exact path="/login" component={LoginPage} />
+    <Route exact path="/register" component={RegistrationForm} />
+    <Route exact path="/catalog" component={CatalogList} />
+    <Route path="/businessprofile/:business_id" component={BusinessProfile} />
 
   </div>
 );

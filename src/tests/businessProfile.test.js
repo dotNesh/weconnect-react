@@ -67,7 +67,8 @@ test('Get business reducer', () => {
       },
       business: {
         'Business name': 'Qwetu', "Business_id": 5, "Category": 'Housing', 'Created By': 'nina', "Description": 'Home away from home', "Location": 'Thika'
-      }
+      },
+      businesses: []
     }
   });
 });

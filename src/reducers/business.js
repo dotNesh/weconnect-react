@@ -13,7 +13,8 @@ const BusinessReducer = (state = initialState, action) => {
   case ADD_BUSINESS:
     return {
       state,
-      message: action.message
+      message: action.message,
+      businesses: []
     };
 
   case GET_BUSINESSES:
@@ -29,6 +30,7 @@ const BusinessReducer = (state = initialState, action) => {
     return {
       state,
       business: action.payloads,
+      businesses: []
     };
 
   case POST_REVIEWS:
