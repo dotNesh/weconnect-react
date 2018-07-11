@@ -22,7 +22,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.js',
   devServer: {
     historyApiFallback: true,
@@ -30,7 +30,7 @@ module.exports = {
   },
   performance: { hints: false },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: 'index_bundle.js',
   },
